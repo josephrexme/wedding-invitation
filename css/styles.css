@@ -1,0 +1,356 @@
+:root {
+  --duration: 2s;
+  --text-color: hsl(333deg, 54%, 47%);
+  --rose-gold: #b76e79;
+  --grey: #999;
+}
+
+.text {
+  color: var(--rose-gold);
+}
+
+* {
+  box-sizing: border-box;
+}
+
+path, rect, circle {
+  stroke: var(--grey);
+}
+
+html {
+  font-size: 62.5%;
+}
+
+body {
+  padding: 10px;
+  font-size: 1.6rem;
+  font-family: arial, sans-serif;
+  background: linear-gradient(135deg, rgba(130, 65, 75, 0.9) 0%, rgba(0, 0, 0, 0.9) 100%), url(https://res.cloudinary.com/strich/image/upload/v1560283401/IMG_0391_vd1rgj.jpg);
+  background-size: cover;
+  background-position: 40% top;
+  background-repeat: no-repeat;
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
+section {
+  position: relative;
+  text-align: center;
+}
+
+h1 {
+  margin: 2.5rem 0;
+  font-size: 40px;
+  text-transform: uppercase;
+}
+h1:first-of-type {
+  margin-top: 0;
+}
+h1:last-of-type {
+  margin-bottom: 0;
+}
+
+h3, h4, p {
+  margin: .5rem 0;
+}
+
+form {
+  margin: 30px 0 10px;
+}
+
+label {
+  display: block;
+  position: relative;
+  margin: 40px 0 10px;
+}
+label svg, label input {
+  width: 100%;
+  max-width: 300px;
+}
+label input {
+  top: -24px;
+  position: absolute;
+  height: 30px;
+  padding: 0 14px;
+  border: 0;
+  background: none;
+  font: inherit;
+  text-align: center;
+  outline: none;
+}
+label input:focus + svg path {
+  stroke: var(--rose-gold);
+}
+
+button {
+  position: relative;
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  background: none;
+  border: 0;
+  outline: none;
+  cursor: pointer;
+}
+button svg {
+  width: 150px;
+  transition: -webkit-transform .5s ease-in-out;
+  transition: transform .5s ease-in-out;
+  transition: transform .5s ease-in-out, -webkit-transform .5s ease-in-out;
+}
+button span {
+  position: absolute;
+  top: 12px;
+  left: 0;
+  right: 0;
+  color: var(--grey);
+}
+button em {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+}
+button:focus path {
+  stroke: var(--rose-gold);
+}
+button:hover svg {
+  -webkit-transform: scale(1.05);
+          transform: scale(1.05);
+}
+
+.animate-button {
+  stroke: #9c4e5a !important;
+  stroke-dasharray: 182.023;
+  -webkit-animation: button-draw var(--duration) ease-in-out;
+          animation: button-draw var(--duration) ease-in-out;
+}
+
+#btnPath {
+  stroke: none;
+}
+
+.black {
+  font-family: arial-black, arial, sans-serif;
+  font-weight: bold;
+}
+
+.container {
+  width: 95%;
+  max-width: 900px;
+  margin: auto;
+  padding: 20px;
+  border: solid medium #8f4752;
+  background: #fff;
+}
+
+.venue {
+  display: block;
+  position: absolute;
+  top: -70px;
+  left: 0;
+  right: 0;
+}
+.venue svg {
+  width: 50%;
+  max-width: 300px;
+}
+
+.invert {
+  color: #888;
+}
+
+.animatable-bottom-left, .animatable-bottom-right {
+  stroke-dasharray: 682.237;
+  -webkit-animation: draw-bottom var(--duration) ease-in-out 0s infinite alternate;
+          animation: draw-bottom var(--duration) ease-in-out 0s infinite alternate;
+}
+
+.animatable-bottomRight, .animatable-bottomLeft {
+  stroke-dasharray: 205.338;
+  -webkit-animation: draw-topBottom var(--duration) ease-in-out 0s infinite alternate;
+          animation: draw-topBottom var(--duration) ease-in-out 0s infinite alternate;
+}
+
+.animatable-w-right, .animatable-w-left {
+  stroke-dasharray: 313.633;
+  -webkit-animation: draw-wTop var(--duration) ease-in-out 0s infinite alternate;
+          animation: draw-wTop var(--duration) ease-in-out 0s infinite alternate;
+}
+
+.animatable-topRight, .animatable-topLeft {
+  stroke-dasharray: 172.409;
+  -webkit-animation: draw-top var(--duration) ease-in-out 0s infinite alternate;
+          animation: draw-top var(--duration) ease-in-out 0s infinite alternate;
+}
+
+.animatable-bottom-left, .animatable-bottom-right, .animatable-bottomRight, .animatable-bottomLeft, .animatable-w-right, .animatable-w-left, .animatable-topRight, .animatable-topLeft {
+  stroke: var(--rose-gold);
+}
+
+.and-right path, .and-left path, .horizontal path {
+  stroke: var(--rose-gold);
+}
+
+.group-a .top, .group-a .bottom, .group-a .invitation, .group-a .couple {
+  position: absolute;
+  left: 0;
+  right: 0;
+}
+.group-a .top {
+  top: 8%;
+}
+.group-a .couple {
+  top: 33%;
+}
+@media (max-width: 920px) {
+  .group-a .couple {
+    top: 32%;
+  }
+}
+@media (max-width: 870px) {
+  .group-a .couple {
+    top: 31%;
+  }
+}
+.group-a .invitation {
+  bottom: 22%;
+}
+.group-a .bottom {
+  bottom: 3.8%;
+}
+
+.and-box {
+  fill: #fff;
+}
+
+.group-b {
+  height: 430px;
+  margin-top: -100px;
+  padding: 125px 10px 10px;
+}
+.group-b .pillar {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 130px;
+}
+.group-b .pillar:last-of-type {
+  left: auto;
+  right: 0;
+}
+.group-b .event-time {
+  position: absolute;
+  bottom: 20px;
+  left: 10px;
+  text-align: left;
+}
+.group-b .event-time:last-of-type {
+  left: auto;
+  right: 10px;
+  text-align: right;
+}
+
+.group-c > h4 {
+  position: absolute;
+  bottom: 12px;
+  left: -4px;
+  right: 0;
+}
+
+.group-d h3 {
+  position: absolute;
+  left: 0;
+  right: 0;
+}
+.group-d h3:first-of-type {
+  top: 15%;
+}
+.group-d h3:last-of-type {
+  bottom: 0;
+}
+
+@-webkit-keyframes draw-bottom {
+  0% {
+    stroke-dashoffset: 682.237;
+  }
+  100% {
+    stroke-dashoffset: 0;
+  }
+}
+
+@keyframes draw-bottom {
+  0% {
+    stroke-dashoffset: 682.237;
+  }
+  100% {
+    stroke-dashoffset: 0;
+  }
+}
+@-webkit-keyframes draw-topBottom {
+  0% {
+    stroke-dashoffset: 205.338;
+  }
+  100% {
+    stroke-dashoffset: 0;
+  }
+}
+@keyframes draw-topBottom {
+  0% {
+    stroke-dashoffset: 205.338;
+  }
+  100% {
+    stroke-dashoffset: 0;
+  }
+}
+@-webkit-keyframes draw-wTop {
+  0% {
+    stroke-dashoffset: 313.633;
+  }
+  100% {
+    stroke-dashoffset: 0;
+  }
+}
+@keyframes draw-wTop {
+  0% {
+    stroke-dashoffset: 313.633;
+  }
+  100% {
+    stroke-dashoffset: 0;
+  }
+}
+@-webkit-keyframes draw-top {
+  0% {
+    stroke-dashoffset: 172.409;
+  }
+  100% {
+    stroke-dashoffset: 0;
+  }
+}
+@keyframes draw-top {
+  0% {
+    stroke-dashoffset: 172.409;
+  }
+  100% {
+    stroke-dashoffset: 0;
+  }
+}
+@-webkit-keyframes button-draw {
+  0% {
+    stroke-dashoffset: 182.023;
+  }
+  100% {
+    stroke-dashoffset: 0;
+  }
+}
+@keyframes button-draw {
+  0% {
+    stroke-dashoffset: 182.023;
+  }
+  100% {
+    stroke-dashoffset: 0;
+  }
+}
+
