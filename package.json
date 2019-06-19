@@ -1,0 +1,55 @@
+{
+  "name": "invites",
+  "version": "1.0.0",
+  "description": "Wedding Invitation",
+  "main": "webpack.config.js",
+  "scripts": {
+    "test": "mocha",
+    "start": "node src/server.js",
+    "dev": "webpack-dev-server",
+    "build": "rm -rf public && webpack"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/josephrexme/wedding-invitation.git"
+  },
+  "keywords": [
+    "wedding"
+  ],
+  "author": "Joseph Rex",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/josephrexme/wedding-invitation/issues"
+  },
+  "homepage": "https://github.com/josephrexme/wedding-invitation#readme",
+  "dependencies": {
+    "@babel/core": "^7.4.5",
+    "@babel/plugin-proposal-class-properties": "^7.4.4",
+    "@babel/plugin-syntax-dynamic-import": "^7.2.0",
+    "@babel/plugin-transform-runtime": "^7.4.4",
+    "@babel/preset-env": "^7.4.5",
+    "@babel/preset-react": "^7.0.0",
+    "@babel/runtime": "^7.4.5",
+    "@reach/router": "^1.2.1",
+    "babel-loader": "^8.0.6",
+    "css-loader": "^3.0.0",
+    "dotenv": "^8.0.0",
+    "express": "^4.17.1",
+    "extract-text-webpack-plugin": "^4.0.0-beta.0",
+    "file-loader": "^4.0.0",
+    "helmet": "^3.18.0",
+    "html-webpack-plugin": "^3.2.0",
+    "html-webpack-template": "^6.2.0",
+    "image-webpack-loader": "^5.0.0",
+    "react": "^16.8.6",
+    "react-dom": "^16.8.6",
+    "styled-components": "^4.3.1",
+    "styled-loader": "0.0.0",
+    "terser-webpack-plugin": "^1.3.0",
+    "webpack": "^4.34.0"
+  },
+  "devDependencies": {
+    "webpack-cli": "^3.3.4",
+    "webpack-dev-server": "^3.7.2"
+  }
+}
