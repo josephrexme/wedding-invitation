@@ -14,6 +14,10 @@ const GlobalStyle = createGlobalStyle`
     --grey: #999;
   }
 
+  html{
+    font-size: 62.5%;
+  }
+
   .text {
     color: var(--rose-gold);
   }
@@ -120,10 +124,11 @@ const GlobalStyle = createGlobalStyle`
   }
   button span {
     position: absolute;
-    top: 12px;
+    top: 10px;
     left: 0;
     right: 0;
     color: var(--grey);
+    font-size: 1.6rem;
   }
   button em {
     position: absolute;

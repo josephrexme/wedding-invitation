@@ -1,5 +1,6 @@
-import React from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import styled, { css, keyframes } from 'styled-components';
+import { TimelineMax } from 'gsap/TweenMax';
 
 const ButtonDraw = keyframes`
   0% {
@@ -133,7 +134,7 @@ const GroupB = styled.section`
 const GroupC = styled.section`
   > h4{
     position: absolute;
-    bottom: 12px;
+    bottom: 14px;
     left: -4px;
     right: 0;
   }
@@ -174,6 +175,51 @@ const BtnPath = styled.path`
 `;
 
 function Page() {
+  const leftBell = useRef();
+  const rightBell = useRef();
+  const horizontalA = useRef();
+  const horizontalB = useRef();
+  const andLeft = useRef();
+  const andRight = useRef();
+  const invitee = useRef();
+  const [btnClicked, setBtnClicked] = useState(false);
+  let duration;
+
+  useEffect(() => {
+    duration = parseInt(getComputedStyle(document.documentElement).getPropertyValue('--duration'));
+    const tl = new TimelineMax({ repeat: -1, yoyo: true });
+    tl
+    .fromTo([leftBell.current, rightBell.current], duration, {
+      rotation: 15,
+      transformOrigin: '50% 5%'
+    }, {
+      rotation: -15,
+      transformOrigin: '50% 5%'
+    }, 'aj')
+    .to(horizontalA.current, duration, {
+      x: -30
+    }, 'aj')
+    .to(horizontalB.current, duration, {
+      x: 30
+    }, 'aj')
+    .to(andLeft.current, duration, {
+      x: 20
+    }, 'aj')
+    .to(andRight.current, duration, {
+      x: -20
+    }, 'aj');
+  });
+
+  const formSubmit = (e) => {
+    e.preventDefault();
+    setBtnClicked(true);
+    const inviteName = invitee.current.value;
+    console.log(inviteName, duration);
+    const removeClick = setTimeout(() => {
+      setBtnClicked(false);
+    }, duration * 1000);
+  };
+
   return (
     <Container>
       <GroupA>
@@ -279,12 +325,12 @@ function Page() {
         <path d="m34.393 140.269v10.313s-.388 7.475 6.282 7.621"/><path d="m39.393 140.269v10.313s-.388 7.475 6.282 7.621"/><path d="m44.393 140.269v10.313s-.388 7.475 6.282 7.621"/><path d="m49.393 140.269v10.313s-.388 7.475 6.282 7.621"/><path d="m53.393 140.269v10.313s-.388 7.475 6.282 7.621"/><path d="m58.393 140.269v10.313s-.388 7.475 6.282 7.621"/><path d="m63.393 140.269v10.313s-.388 7.475 6.282 7.621"/><path d="m67.393 140.269v10.313s-.388 7.475 6.282 7.621"/>
         <path d="m142.189 275.683 27.052-16.305 146.352-.302 28.551 16.607-27.772 13.934h-147.782z"/>
         <path d="m23.023 259h16.883v16.335h-16.883z"/><path d="m5.667 226.718v65.315h64.26l-8.505-8.505h-48.02v-49.205z"/><path d="m446.081 259h16.883v16.335h-16.883z"/><path d="m479.985 226.718v65.315h-64.26l8.505-8.505h48.02v-49.205z"/>
-        <g className="and-right">
+        <g className="and-right" ref={andRight}>
         <AnimatedPath d="m355.608 143.802h-84"/>
         <AnimatedPath d="m361.597 143.799-2.996-3.092-2.993 3.099 2.996 3.091z"/>
         </g>
         <path d="m196.577 211.25h93.18v19.784h-93.18z"/><path d="m289.757 214.016h8.131l12.209.071-13.903 7.055 13.903 7.055-12.209.07h-8.131z"/><path d="m196.577 214.016h-8.131l-12.209.071 13.902 7.055-13.902 7.055 12.209.07h8.131z"/>
-        <g className="and-left">
+        <g className="and-left" ref={andLeft}>
         <AnimatedPath d="m131.315 143.802h84"/>
         <AnimatedPath d="m125.325 143.799 2.996-3.092 2.994 3.099-2.997 3.091z"/>
         </g>
@@ -300,16 +346,16 @@ function Page() {
       </GroupA>
       <GroupB>
         <h3 className="text">ENTER THE NAMES OF YOUR INVITES</h3>
-        <form action="#" id="inviteForm">
+        <form onSubmit={formSubmit}>
           <label htmlFor="">
-            <input type="text" placeholder="e.g Arya Stark" id="invitee" />
+            <input type="text" placeholder="e.g Arya Stark" ref={invitee} />
             <svg viewBox="0 0 201 8" xmlns="http://www.w3.org/2000/svg"><g fill="none" stroke="#000"><path d="m194.5 3.595h-187.417"/><path d="m200.49 3.591-2.997-3.091-2.993 3.098 2.996 3.091z"/><path d="m6.49 3.591-2.997-3.091-2.993 3.098 2.996 3.091z"/></g></svg>
           </label>
           <button>
             <span>ADD INVITE</span>
             <svg viewBox="0 0 85 21" xmlns="http://www.w3.org/2000/svg"><path d="m.5 11.129 11.227-10.436 60.741-.193 11.849 10.629-11.526 8.919h-61.334l-10.957-8.919z" fill="none" stroke="#000"/></svg>
             <em><svg viewBox="0 0 85 21" xmlns="http://www.w3.org/2000/svg">
-            <BtnPath d="m.5 11.129 11.227-10.436 60.741-.193 11.849 10.629-11.526 8.919h-61.334l-10.957-8.919z" fill="none"/></svg></em>
+            <BtnPath active={btnClicked} d="m.5 11.129 11.227-10.436 60.741-.193 11.849 10.629-11.526 8.919h-61.334l-10.957-8.919z" fill="none"/></svg></em>
           </button>
         </form>
         <h4 className="text">SEATS RESERVED FOR:</h4>
@@ -324,21 +370,21 @@ function Page() {
         </div>
       <svg viewBox="0 0 76 249" xmlns="http://www.w3.org/2000/svg" className="pillar">
       <g fill="none" stroke="#000">
-      <g className="horizontal">
+      <g className="horizontal" ref={horizontalA}>
       <path d="m68.876 241.733h-68.376"/>
       <path d="m75.066 241.73-3.097-3.092-3.093 3.099 3.096 3.091z"/>
       </g>
       <path d="m.5.5v247.594h16.85l6.361-6.361" className="vertical"/>
       </g></svg>
-        <svg viewBox="0 0 76 249" xmlns="http://www.w3.org/2000/svg" className="pillar">
-        <g fill="none" stroke="#000">
-        <g className="horizontal">
-        <path d="m6.689 241.733h68.377"/>
-        <path d="m.5 241.73 3.096-3.092 3.093 3.099-3.096 3.091z"/>
-          </g>
-        <path d="m75.066.5v247.594h-16.85l-6.361-6.361" className="vertical"/>
-        </g>
-        </svg>
+      <svg viewBox="0 0 76 249" xmlns="http://www.w3.org/2000/svg" className="pillar">
+      <g fill="none" stroke="#000">
+      <g className="horizontal" ref={horizontalB}>
+      <path d="m6.689 241.733h68.377"/>
+      <path d="m.5 241.73 3.096-3.092 3.093 3.099-3.096 3.091z"/>
+      </g>
+      <path d="m75.066.5v247.594h-16.85l-6.361-6.361" className="vertical"/>
+      </g>
+      </svg>
       </GroupB>
       <GroupC>
         <h4 className="text"><a href="https://goo.gl/maps/xeynWRhBA5rGo7Q57" target="_blank" title="Directions from Milwaukee">GET DIRECTIONS</a></h4>
@@ -355,12 +401,12 @@ function Page() {
         <h3 className="black text">THANK YOU</h3>
         <svg viewBox="0 0 490 151" xmlns="http://www.w3.org/2000/svg">
         <g fill="none" stroke="#000">
-          <g id="left-bell">
+          <g id="left-bell" ref={leftBell}>
           <path d="m54.447 36.228s8.744 4.272 20.28.061c-.718-.771-2.924.006-4.546-10.593-.532-4.917-8.431-7.808-11.012-.515-2.207 8.6-2.029 9.844-4.722 11.047z"/>
           <path d="m63.985 20.773-.233-12.267 1.426-.003.326 12.27"/>
           <path d="m62.024 38.145s1.903 3.756 4.466 0"/>
           </g>
-          <g id="right-bell">
+          <g id="right-bell" ref={rightBell}>
           <path d="m414.447 36.228s8.744 4.272 20.28.061c-.718-.771-2.924.006-4.546-10.593-.532-4.917-8.431-7.808-11.012-.515-2.207 8.6-2.029 9.844-4.722 11.047z"/>
           <path d="m423.985 20.773-.233-12.267 1.426-.003.326 12.27"/>
           <path d="m422.024 38.145s1.903 3.756 4.466 0"/>
