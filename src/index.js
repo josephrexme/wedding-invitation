@@ -75,12 +75,15 @@ const GlobalStyle = createGlobalStyle`
     margin-bottom: 0;
   }
 
-  h3, h4, p {
+  h3, h4 {
+    margin: 1rem 0;
+  }
+  p{
     margin: .5rem 0;
   }
 
   form {
-    margin: 30px 0 10px;
+    margin: 0 0 10px;
   }
 
   label {

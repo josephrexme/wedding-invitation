@@ -86,11 +86,11 @@ const config = {
       mobile: true,
       appMountIds: ['app'],
     }),
-    new webpack.EnvironmentPlugin([
-      'NODE_ENV',
-      'HOST',
-      'API_KEY',
-    ]),
+    new webpack.DefinePlugin({
+      NODE_ENV: JSON.stringify(process.env.NODE_ENV),
+      HOST: JSON.stringify(process.env.HOST),
+      API_KEY: JSON.stringify(process.env.API_KEY),
+    }),
   ].concat(prodPlugins)
 };
 

@@ -1,6 +1,8 @@
 import React, { useEffect, useRef, useState } from 'react';
 import styled, { css, keyframes } from 'styled-components';
 import { TimelineMax } from 'gsap/TweenMax';
+import axios from 'axios';
+import visitormap from './visitormap';
 
 const ButtonDraw = keyframes`
   0% {
@@ -88,27 +90,31 @@ const GroupA = styled.section`
   .couple{
     top: 31.5%;
   }
-  @media (max-width: 920px) {
+  @media (max-width: 960px) {
     .couple {
-      top: 32%;
+      top: 30%;
     }
   }
-  @media (max-width: 870px) {
+  @media (max-width: 860px) {
     .couple {
-      top: 31%;
+      top: 28%;
     }
   }
   .invitation {
-    bottom: 22%;
+    bottom: 21%;
   }
   .bottom {
-    bottom: 3.8%;
+    bottom: 2.5%;
+    text-transform: uppercase;
   }
 `;
 const GroupB = styled.section`
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
   height: 430px;
   margin-top: -100px;
-  padding: 125px 10px 10px;
+  padding: 20px 10px 10px;
   .pillar {
     position: absolute;
     top: 0;
@@ -121,7 +127,7 @@ const GroupB = styled.section`
   }
   .event-time {
     position: absolute;
-    bottom: 20px;
+    bottom: 3%;
     left: 10px;
     text-align: left;
   }
@@ -134,7 +140,7 @@ const GroupB = styled.section`
 const GroupC = styled.section`
   > h4{
     position: absolute;
-    bottom: 14px;
+    bottom: 10px;
     left: -4px;
     right: 0;
   }
@@ -174,6 +180,19 @@ const BtnPath = styled.path`
   `}
 `;
 
+const { pathname } = window.location;
+const visitorId = pathname.length === 1 ?
+  undefined : visitormap[pathname.substring(1)];
+axios.defaults.baseURL = HOST;
+axios.defaults.headers.common['Authorization'] = `Bearer ${API_KEY}`;
+axios.defaults.headers.post['Content-Type'] = 'application/json';
+
+const invitationMap = {
+  1: 'YOU MAY INVITE 1 MORE PERSON. ENTER THEIR NAME',
+  2: 'YOU MAY INVITE 2 MORE PEOPLE. ENTER EACH OF THEIR NAMES',
+  3: 'YOU MAY INVITE 3 MORE PEOPLE. ENTER EACH OF THEIR NAMES',
+};
+
 function Page() {
   const leftBell = useRef();
   const rightBell = useRef();
@@ -183,9 +202,25 @@ function Page() {
   const andRight = useRef();
   const invitee = useRef();
   const [btnClicked, setBtnClicked] = useState(false);
+  const [visitorInfo, setVisitorInfo] = useState({});
+  const [inviteCount, setInviteCount] = useState(0);
+  const [reservations, setReservations] = useState([]);
   let duration;
 
+  const getVisitor = async (id) => {
+    const visitor = await axios.get(`/attendees/${id}`);
+    const { fields } = visitor.data;
+    setVisitorInfo(fields);
+    setInviteCount(fields.invites);
+    if(fields.rsvps) {
+      setReservations([fields.name, ...fields.rsvps.split(', ')]);
+    } else {
+      setReservations([fields.name]);
+    }
+  };
+
   useEffect(() => {
+    // animations
     duration = parseInt(getComputedStyle(document.documentElement).getPropertyValue('--duration'));
     const tl = new TimelineMax({ repeat: -1, yoyo: true });
     tl
@@ -208,7 +243,9 @@ function Page() {
     .to(andRight.current, duration, {
       x: -20
     }, 'aj');
-  });
+    // request
+    getVisitor(visitorId);
+  }, []);
 
   const formSubmit = (e) => {
     e.preventDefault();
@@ -225,7 +262,7 @@ function Page() {
       <GroupA>
         <h3 className="top black text">SEPTEMBER 1 2019</h3>
         <h4 className="invitation text">INVITE YOU</h4>
-        <h3 className="bottom text">Brandon Stark</h3>
+        <h3 className="bottom text">{visitorInfo.name}</h3>
         <div className="couple">
           <h1 className="black text">Amanda</h1>
           <h4 className="text">AND</h4>
@@ -345,21 +382,27 @@ function Page() {
         </svg>
       </GroupA>
       <GroupB>
-        <h3 className="text">ENTER THE NAMES OF YOUR INVITES</h3>
-        <form onSubmit={formSubmit}>
-          <label htmlFor="">
-            <input type="text" placeholder="e.g Arya Stark" ref={invitee} />
-            <svg viewBox="0 0 201 8" xmlns="http://www.w3.org/2000/svg"><g fill="none" stroke="#000"><path d="m194.5 3.595h-187.417"/><path d="m200.49 3.591-2.997-3.091-2.993 3.098 2.996 3.091z"/><path d="m6.49 3.591-2.997-3.091-2.993 3.098 2.996 3.091z"/></g></svg>
-          </label>
-          <button>
-            <span>ADD INVITE</span>
-            <svg viewBox="0 0 85 21" xmlns="http://www.w3.org/2000/svg"><path d="m.5 11.129 11.227-10.436 60.741-.193 11.849 10.629-11.526 8.919h-61.334l-10.957-8.919z" fill="none" stroke="#000"/></svg>
-            <em><svg viewBox="0 0 85 21" xmlns="http://www.w3.org/2000/svg">
-            <BtnPath active={btnClicked} d="m.5 11.129 11.227-10.436 60.741-.193 11.849 10.629-11.526 8.919h-61.334l-10.957-8.919z" fill="none"/></svg></em>
-          </button>
-        </form>
+        {
+          inviteCount ? (
+            <>
+            <h3 className="text">{invitationMap[inviteCount]}</h3>
+            <form onSubmit={formSubmit}>
+              <label htmlFor="">
+                <input type="text" placeholder="e.g Arya Stark" ref={invitee} />
+                <svg viewBox="0 0 201 8" xmlns="http://www.w3.org/2000/svg"><g fill="none" stroke="#000"><path d="m194.5 3.595h-187.417"/><path d="m200.49 3.591-2.997-3.091-2.993 3.098 2.996 3.091z"/><path d="m6.49 3.591-2.997-3.091-2.993 3.098 2.996 3.091z"/></g></svg>
+              </label>
+              <button>
+                <span>ADD INVITE</span>
+                <svg viewBox="0 0 85 21" xmlns="http://www.w3.org/2000/svg"><path d="m.5 11.129 11.227-10.436 60.741-.193 11.849 10.629-11.526 8.919h-61.334l-10.957-8.919z" fill="none" stroke="#000"/></svg>
+                <em><svg viewBox="0 0 85 21" xmlns="http://www.w3.org/2000/svg">
+                <BtnPath active={btnClicked} d="m.5 11.129 11.227-10.436 60.741-.193 11.849 10.629-11.526 8.919h-61.334l-10.957-8.919z" fill="none"/></svg></em>
+              </button>
+            </form>
+            </>
+          ) : null
+        }
         <h4 className="text">SEATS RESERVED FOR:</h4>
-        <p className="text" id="reserved">Brandon Stark</p>
+        <p className="text" id="reserved">{reservations.join(', ')}</p>
         <div className="event-time">
           <p className="text">CEREMONY</p>
           <h4 className="text">3:00PM</h4>
