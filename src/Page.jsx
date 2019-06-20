@@ -205,7 +205,6 @@ function Page() {
   const [visitorInfo, setVisitorInfo] = useState({});
   const [inviteCount, setInviteCount] = useState(0);
   const [reservations, setReservations] = useState([]);
-  let duration;
 
   const getVisitor = async (id) => {
     const visitor = await axios.get(`/attendees/${id}`);
@@ -219,9 +218,20 @@ function Page() {
     }
   };
 
+  const addGuest = async (id, newGuests) => {
+    const visitor = await axios.patch(`/attendees/${id}`, {
+      fields: {
+        rsvps: newGuests.slice(1).join(', '),
+        invites: visitorInfo.invites - 1,
+      }
+    });
+    setInviteCount(visitorInfo.invites - 1);
+    setVisitorInfo(visitor.data.fields);
+  };
+
   useEffect(() => {
     // animations
-    duration = parseInt(getComputedStyle(document.documentElement).getPropertyValue('--duration'));
+    const duration = parseInt(getComputedStyle(document.documentElement).getPropertyValue('--duration'));
     const tl = new TimelineMax({ repeat: -1, yoyo: true });
     tl
     .fromTo([leftBell.current, rightBell.current], duration, {
@@ -244,17 +254,24 @@ function Page() {
       x: -20
     }, 'aj');
     // request
-    getVisitor(visitorId);
+    if(visitorId) {
+      getVisitor(visitorId);
+    } else {
+      setVisitorInfo({ name: 'Dr. Strange' });
+      setReservations(['Captain Rogers', 'Tony Stark']);
+    }
   }, []);
 
   const formSubmit = (e) => {
     e.preventDefault();
     setBtnClicked(true);
     const inviteName = invitee.current.value;
-    console.log(inviteName, duration);
+    const newReservations = [...reservations, inviteName];
     const removeClick = setTimeout(() => {
+      addGuest(visitorId, newReservations);
+      setReservations(newReservations);
       setBtnClicked(false);
-    }, duration * 1000);
+    }, 2000);
   };
 
   return (
