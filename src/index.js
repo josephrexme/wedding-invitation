@@ -44,7 +44,8 @@ const GlobalStyle = createGlobalStyle`
   }
 
   body {
-    padding: 10px;
+    margin: 0;
+    padding: 0;
     font-size: 1.6rem;
     font-family: arial, sans-serif;
     background: linear-gradient(135deg, rgba(130, 65, 75, 0.9) 0%, rgba(0, 0, 0, 0.9) 100%), url(https://res.cloudinary.com/strich/image/upload/v1560283401/IMG_0391_vd1rgj.jpg);
@@ -80,6 +81,60 @@ const GlobalStyle = createGlobalStyle`
   }
   p{
     margin: .5rem 0;
+    max-width: 70%;
+  }
+  .auto{
+    margin-left: auto;
+    margin-right: auto;
+  }
+  @media (max-width: 880px) {
+    h1{
+      font-size: 36px;
+    }
+    h4{
+      font-size: 14px;
+    }
+  }
+  @media (max-width: 850px) {
+    h1{
+      margin: 1.5rem 0;
+      font-size: 28px;
+    }
+    h3{
+      font-size: 16px;
+    }
+  }
+  @media (max-width: 760px) {
+    h3, h4{
+      margin: .8rem 0;
+    }
+    h4{
+      font-size: 12px;
+    }
+    h1{
+      margin: .8rem 0;
+      font-size: 24px;
+    }
+    p{
+      font-size: 12px;
+    }
+  }
+  @media (max-width: 650px) {
+    h3{
+      font-size: 12px;
+    }
+  }
+  @media (max-width: 360px) {
+    h1{
+      margin: .5rem 0;
+      font-size: 18px;
+    }
+    h3{
+      font-size: 10px;
+    }
+    h4{
+      margin: .5rem 0;
+    }
   }
 
   form {

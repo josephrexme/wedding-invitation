@@ -70,12 +70,15 @@ const AnimatedPath = styled.path`
 `;
 
 const Container = styled.div`
-  width: 95%;
+  width: 98%;
   max-width: 900px;
-  margin: auto;
+  margin: 10px auto;
   padding: 20px;
   border: solid medium #8f4752;
   background: #fff;
+  @media (max-width: 480px) {
+    padding: 4px;
+  }
 `;
 
 const GroupA = styled.section`
@@ -86,6 +89,9 @@ const GroupA = styled.section`
   }
   .top{
     top: 8%;
+    > :last-child{
+      display: none;
+    }
   }
   .couple{
     top: 31.5%;
@@ -95,17 +101,66 @@ const GroupA = styled.section`
       top: 30%;
     }
   }
-  @media (max-width: 860px) {
-    .couple {
-      top: 28%;
-    }
-  }
   .invitation {
     bottom: 21%;
   }
   .bottom {
     bottom: 2.5%;
     text-transform: uppercase;
+  }
+  @media (max-width: 850px) {
+    .top{
+      top: 6%;
+    }
+    .couple{
+      top: 34%;
+    }
+  }
+  @media (max-width: 800px) {
+    .couple{
+      top: 33%;
+    }
+  }
+  @media (max-width: 760px) {
+    .couple{
+      top: 32%;
+    }
+    .top{
+      > :last-child{
+        display: inline-block;
+      }
+      > :first-child{
+        display: none;
+      }
+    }
+    .and-right, .and-left, .and-box{
+      display: none;
+    }
+  }
+  @media(max-width: 600px) {
+    #ribbon{
+      display: none;
+    }
+  }
+  @media (max-width: 540px) {
+    .invitation{
+      bottom: 15%;
+    }
+    .top{
+      top: 4%;
+    }
+    .bottom{
+      bottom: 2%;
+      font-size: 14px;
+    }
+    #invitee-box{
+      display: none;
+    }
+  }
+  @media (max-width: 480px) {
+    .couple{
+      top: 25%;
+    }
   }
 `;
 const GroupB = styled.section`
@@ -136,13 +191,23 @@ const GroupB = styled.section`
     right: 10px;
     text-align: right;
   }
+  @media (max-width: 700px) {
+    .pillar{
+      display: none;
+    }
+  }
 `;
 const GroupC = styled.section`
   > h4{
     position: absolute;
-    bottom: 10px;
+    bottom: 4%;
     left: -4px;
     right: 0;
+  }
+  @media (max-width: 600px) {
+    .direction-line-right, .direction-line-left, .direction-box{
+      display: none;
+    }
   }
 `;
 const GroupD = styled.section`
@@ -157,6 +222,14 @@ const GroupD = styled.section`
   h3:last-of-type {
     bottom: 0;
   }
+  @media (max-width: 540px) {
+    h3:first-of-type {
+      top: 10%;
+    }
+    h3:last-of-type {
+      bottom: -3%;
+    }
+  }
 `;
 
 const Venue = styled.div`
@@ -166,7 +239,7 @@ const Venue = styled.div`
   left: 0;
   right: 0;
   svg{
-    width: 50%;
+    width: 30%;
     max-width: 300px;
   }
 `;
@@ -279,7 +352,7 @@ function Page() {
   return (
     <Container>
       <GroupA>
-        <h3 className="top black text">SEPTEMBER 1 2019</h3>
+        <h3 className="top black text"><span>SEPTEMBER 1 2019</span><span>9.1.19</span></h3>
         <h4 className="invitation text">INVITE YOU</h4>
         <h3 className="bottom text">{visitorInfo.name}</h3>
         <div className="couple">
@@ -379,18 +452,22 @@ function Page() {
         <path d="m25.393 140.269v10.313s-.388 7.475 6.282 7.621"/>
         <path d="m29.393 140.269v10.313s-.388 7.475 6.282 7.621"/>
         <path d="m34.393 140.269v10.313s-.388 7.475 6.282 7.621"/><path d="m39.393 140.269v10.313s-.388 7.475 6.282 7.621"/><path d="m44.393 140.269v10.313s-.388 7.475 6.282 7.621"/><path d="m49.393 140.269v10.313s-.388 7.475 6.282 7.621"/><path d="m53.393 140.269v10.313s-.388 7.475 6.282 7.621"/><path d="m58.393 140.269v10.313s-.388 7.475 6.282 7.621"/><path d="m63.393 140.269v10.313s-.388 7.475 6.282 7.621"/><path d="m67.393 140.269v10.313s-.388 7.475 6.282 7.621"/>
-        <path d="m142.189 275.683 27.052-16.305 146.352-.302 28.551 16.607-27.772 13.934h-147.782z"/>
+        <path d="m142.189 275.683 27.052-16.305 146.352-.302 28.551 16.607-27.772 13.934h-147.782z" id="invitee-box"/>
         <path d="m23.023 259h16.883v16.335h-16.883z"/><path d="m5.667 226.718v65.315h64.26l-8.505-8.505h-48.02v-49.205z"/><path d="m446.081 259h16.883v16.335h-16.883z"/><path d="m479.985 226.718v65.315h-64.26l8.505-8.505h48.02v-49.205z"/>
         <g className="and-right" ref={andRight}>
         <AnimatedPath d="m355.608 143.802h-84"/>
         <AnimatedPath d="m361.597 143.799-2.996-3.092-2.993 3.099 2.996 3.091z"/>
         </g>
-        <path d="m196.577 211.25h93.18v19.784h-93.18z"/><path d="m289.757 214.016h8.131l12.209.071-13.903 7.055 13.903 7.055-12.209.07h-8.131z"/><path d="m196.577 214.016h-8.131l-12.209.071 13.902 7.055-13.902 7.055 12.209.07h8.131z"/>
         <g className="and-left" ref={andLeft}>
         <AnimatedPath d="m131.315 143.802h84"/>
         <AnimatedPath d="m125.325 143.799 2.996-3.092 2.994 3.099-2.997 3.091z"/>
         </g>
-        <path d="m215.029 143.678 10.111-11.127h35.991l10.477 11.127-9.701 11.375h-35.907z" fill="#fff"/>
+        <path d="m215.029 143.678 10.111-11.127h35.991l10.477 11.127-9.701 11.375h-35.907z" className="and-box" fill="#fff"/>
+        <g id="ribbon">
+          <path d="m196.577 211.25h93.18v19.784h-93.18z"/>
+          <path d="m289.757 214.016h8.131l12.209.071-13.903 7.055 13.903 7.055-12.209.07h-8.131z"/>
+          <path d="m196.577 214.016h-8.131l-12.209.071 13.902 7.055-13.902 7.055 12.209.07h8.131z"/>
+        </g>
         <AnimatedPath d="m462.192 188.384v60.993h-8.479v17.541h-16.703v8.64h-92.866" className="bottomRight"/>
         <AnimatedPath d="m24.142 188.267v61.11h8.479v17.541h16.703v8.64h92.865" className="bottomLeft"/>
         <AnimatedPath d="m76.251 24.059h-70.322v-8.029h8.706v85.35" className="topLeft"/>
@@ -421,7 +498,7 @@ function Page() {
           ) : null
         }
         <h4 className="text">SEATS RESERVED FOR:</h4>
-        <p className="text" id="reserved">{reservations.join(', ')}</p>
+        <p className="auto text" id="reserved">{reservations.join(', ')}</p>
         <div className="event-time">
           <p className="text">CEREMONY</p>
           <h4 className="text">3:00PM</h4>
@@ -453,10 +530,14 @@ function Page() {
         <Venue>
           <svg viewBox="0 0 172 64" xmlns="http://www.w3.org/2000/svg"><g fill="none" stroke="#000"><path d="m.5 63.118h170.555"/><path d="m106.101 63.118v-56.249"/><path d="m65.486 63.118v-56.249"/><path d="m11.332 63.118v-29.814"/><path d="m160.255 63.118v-29.814"/><path d="m126.409 63.118-.016-38.31"/><path d="m45.178 63.118-.015-38.343"/><path d="m61.405 2.863h48.745v4.006h-48.745z"/><path d="m126.393 29.299h35.844v4.006h-35.844z"/><path d="m126.409 26.936h37.225v2.363h-37.225z"/><path d="m9.329 29.299h35.844v4.006h-35.844z"/><path d="m7.932 26.936h37.225v2.363h-37.225z"/><path d="m44.018 21.292 21.468-10.42-.046 4.171-21.343 9.991z"/><path d="m41.984 19.429 23.465-11.62-.004 3.063-23.374 11.406z"/><path d="m127.57 21.292-21.469-10.42.046 4.171 21.343 9.991z"/><path d="m129.604 19.429-23.465-11.62.003 3.063 23.374 11.406z"/><path d="m58.8.5h54.16v2.363h-54.16z"/><path d="m147.792 41.478-.021-3.347h4.458v6.924h-4.417l-.02-3.577h4.437"/><path d="m147.792 52.308-.021-3.346h4.458v6.924h-4.417l-.02-3.578h4.437"/><path d="m32.716 41.478-.022-3.347h4.458v6.924h-4.417l-.019-3.577h4.436"/><path d="m32.716 52.308-.022-3.346h4.458v6.924h-4.417l-.019-3.578h4.436"/><path d="m134.253 41.478-.021-3.347h4.458v6.924h-4.417l-.02-3.577h4.437"/><path d="m134.253 52.308-.021-3.346h4.458v6.924h-4.417l-.02-3.578h4.437"/><path d="m19.177 41.478-.021-3.347h4.458v6.924h-4.417l-.02-3.577h4.437"/><path d="m19.177 52.308-.021-3.346h4.458v6.924h-4.417l-.02-3.578h4.437"/><path d="m70.882 21.78v-9.653h29.554v13.16h-29.503l-.051-3.507h29.554"/><path d="m93.423 12.127v9.653"/><path d="m85.977 12.127v9.653"/><path d="m78.531 12.127v9.653"/><path d="m70.882 39.379v-9.653h29.554v13.161h-29.503l-.051-3.508h29.554"/><path d="m93.423 29.726v9.653"/><path d="m85.977 29.726v9.653"/><path d="m78.531 29.726v9.653"/><path d="m108.471 36.397v-9.653h15.191v13.16h-15.165l-.026-3.507h15.191"/><path d="m118.704 26.744v9.653"/><path d="m113.522 26.744v9.653"/><path d="m108.471 53.32v-9.653h15.191v13.16h-15.165l-.026-3.507h15.191"/><path d="m118.704 43.667v9.653"/><path d="m113.522 43.667v9.653"/><path d="m47.549 36.397v-9.653h15.19v13.16h-15.164l-.026-3.507h15.19"/><path d="m57.781 26.744v9.653"/><path d="m52.6 26.744v9.653"/><path d="m47.549 53.32v-9.653h15.19v13.16h-15.164l-.026-3.507h15.19"/><path d="m57.781 43.667v9.653"/><path d="m52.6 43.667v9.653"/><path d="m70.882 63.118v-16.182l29.554.084v16.098"/><path d="m77.167 63.118v-12.156l16.984.064v12.092"/><path d="m77.167 53.518h16.984"/><path d="m85.659 50.962v2.556"/><path d="m98.228 47.155h2.208v2.233h-2.208z"/><path d="m70.882 47.155h2.208v2.233h-2.208z"/></g></svg>
           <h3 className="text">DECATUR CONFERENCE CENTER</h3>
-          <p className="text">4191, W US Hwy 36, Decatur, IL 62522</p>
-          <p className="invert">Coming from Milwaukee? Use link below for less tolls</p>
+          <p className="auto text">4191, W US Hwy 36, Decatur, IL 62522</p>
+          <p className="auto invert">Coming from Milwaukee? Use link below for less tolls</p>
         </Venue>
-        <svg viewBox="0 0 490 124" xmlns="http://www.w3.org/2000/svg"><g fill="none" stroke="#000"><path d="m22.464 5.162-4.662-4.662h-17.302v30.782h55.16l5.477-5.477h-60.637"/><path d="m.5 5.201h34.121v2.675h-34.121"/><path d="m48.711 31.282v5.77h-48.211v-5.77"/><path d="m41.659 37.052-7.038 7.037h-25.198v65.719h-8.923v-72.756"/><path d="m9.423 109.808h8.353v-48.247s-.199-5.973 5.435-5.973h8.115v-11.443"/><path d="m6.161 7.876v10.208s.017 7.592 5.765 7.634"/><path d="m11.161 7.876v10.208s.017 7.592 5.765 7.634"/><path d="m16.161 7.876v10.208s.017 7.592 5.765 7.634"/><path d="m20.161 7.876v10.208s.017 7.592 5.765 7.634"/><path d="m25.161 7.876v10.208s.017 7.592 5.765 7.634"/><path d="m30.161 7.876v10.208s.017 7.592 5.765 7.634"/><path d="m34.161 7.876v10.208s.017 7.592 5.765 7.634"/><path d="m467.173 5.162 4.661-4.662h17.303v30.782h-55.16l-5.477-5.477h60.637"/><path d="m489.137 5.201h-34.122v2.675h34.122"/><path d="m440.926 31.282v5.77h48.211v-5.77"/><path d="m447.978 37.052 7.037 7.037h25.199v65.719h8.923v-72.756"/><path d="m480.214 109.808h-8.353v-48.247s.198-5.973-5.435-5.973h-8.115v-11.443"/><path d="m483.476 7.876v10.208s-.017 7.592-5.765 7.634"/><path d="m478.476 7.876v10.208s-.017 7.592-5.765 7.634"/><path d="m473.476 7.876v10.208s-.017 7.592-5.765 7.634"/><path d="m469.476 7.876v10.208s-.017 7.592-5.765 7.634"/><path d="m464.476 7.876v10.208s-.017 7.592-5.765 7.634"/><path d="m459.476 7.876v10.208s-.017 7.592-5.765 7.634"/><path d="m455.476 7.876v10.208s-.017 7.592-5.765 7.634"/><path d="m179.936 110.395 17.004-14.307 91.996-.265 17.946 14.572-17.457 12.225h-92.894z"/><path d="m472.152 109.808h-165.27"/><path d="m179.936 109.808h-163.444"/></g></svg>
+        <svg viewBox="0 0 490 124" xmlns="http://www.w3.org/2000/svg"><g fill="none" stroke="#000"><path d="m22.464 5.162-4.662-4.662h-17.302v30.782h55.16l5.477-5.477h-60.637"/><path d="m.5 5.201h34.121v2.675h-34.121"/><path d="m48.711 31.282v5.77h-48.211v-5.77"/><path d="m41.659 37.052-7.038 7.037h-25.198v65.719h-8.923v-72.756"/><path d="m9.423 109.808h8.353v-48.247s-.199-5.973 5.435-5.973h8.115v-11.443"/><path d="m6.161 7.876v10.208s.017 7.592 5.765 7.634"/><path d="m11.161 7.876v10.208s.017 7.592 5.765 7.634"/><path d="m16.161 7.876v10.208s.017 7.592 5.765 7.634"/><path d="m20.161 7.876v10.208s.017 7.592 5.765 7.634"/><path d="m25.161 7.876v10.208s.017 7.592 5.765 7.634"/><path d="m30.161 7.876v10.208s.017 7.592 5.765 7.634"/><path d="m34.161 7.876v10.208s.017 7.592 5.765 7.634"/><path d="m467.173 5.162 4.661-4.662h17.303v30.782h-55.16l-5.477-5.477h60.637"/><path d="m489.137 5.201h-34.122v2.675h34.122"/><path d="m440.926 31.282v5.77h48.211v-5.77"/><path d="m447.978 37.052 7.037 7.037h25.199v65.719h8.923v-72.756"/><path d="m480.214 109.808h-8.353v-48.247s.198-5.973-5.435-5.973h-8.115v-11.443"/><path d="m483.476 7.876v10.208s-.017 7.592-5.765 7.634"/><path d="m478.476 7.876v10.208s-.017 7.592-5.765 7.634"/><path d="m473.476 7.876v10.208s-.017 7.592-5.765 7.634"/><path d="m469.476 7.876v10.208s-.017 7.592-5.765 7.634"/><path d="m464.476 7.876v10.208s-.017 7.592-5.765 7.634"/><path d="m459.476 7.876v10.208s-.017 7.592-5.765 7.634"/><path d="m455.476 7.876v10.208s-.017 7.592-5.765 7.634"/>
+        <path d="m179.936 110.395 17.004-14.307 91.996-.265 17.946 14.572-17.457 12.225h-92.894z" className="direction-box"/>
+        <path d="m472.152 109.808h-165.27" className="direction-line-right"/>
+        <path d="m179.936 109.808h-163.444" className="direction-line-left"/>
+        </g></svg>
       </GroupC>
       <GroupD>
         <h3 className="black text">PLEASE REPLY BY JULY 30TH</h3>
