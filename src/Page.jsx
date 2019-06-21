@@ -209,6 +209,7 @@ function Page() {
   const getVisitor = async (id) => {
     const visitor = await axios.get(`/attendees/${id}`);
     const { fields } = visitor.data;
+    console.log('Debug 1', id, fields);
     setVisitorInfo(fields);
     setInviteCount(fields.invites);
     if(fields.rsvps) {
