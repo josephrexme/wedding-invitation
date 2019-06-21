@@ -264,14 +264,16 @@ function Page() {
 
   const formSubmit = (e) => {
     e.preventDefault();
-    setBtnClicked(true);
     const inviteName = invitee.current.value;
-    const newReservations = [...reservations, inviteName];
-    const removeClick = setTimeout(() => {
-      addGuest(visitorId, newReservations);
-      setReservations(newReservations);
-      setBtnClicked(false);
-    }, 2000);
+    if(inviteName) {
+      setBtnClicked(true);
+      const removeClick = setTimeout(() => {
+        const newReservations = [...reservations, inviteName];
+        addGuest(visitorId, newReservations);
+        setReservations(newReservations);
+        setBtnClicked(false);
+      }, 2000);
+    }
   };
 
   return (
