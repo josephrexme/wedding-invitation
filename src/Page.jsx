@@ -196,11 +196,11 @@ const GroupB = styled.section`
       display: none;
     }
   }
-  @media (max-width: 700px) {
-    ${({empty}) => empty && css`
+  ${({empty}) => empty && css`
+    @media (max-width: 700px) {
       height: 250px;
-    `}
-  }
+    }
+  `}
 `;
 const GroupC = styled.section`
   > h4{
@@ -482,7 +482,7 @@ function Page() {
           </g>
         </svg>
       </GroupA>
-      <GroupB empty={!inviteCount}>
+      <GroupB empty={inviteCount === 0}>
         {
           inviteCount ? (
             <>
