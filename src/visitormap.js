@@ -35,7 +35,7 @@ const visitormap = {
   dashana: 'recvtbSdXZxx5gGbi',
   summeral: 'recHbdpmJqhgQmOOA',
   teyhana: 'recWIX7210oyTG855',
-  demarius: 'recJvKA29rfeMhGEs',
+  dekeema: 'recJvKA29rfeMhGEs',
   shanda: 'recsN2G94hk39cisu',
   kiarra: 'recsYY1emIzK9DFVI',
   steve: 'recIeqY0OfYQRJOZB',
