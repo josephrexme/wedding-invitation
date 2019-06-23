@@ -74,6 +74,7 @@ const visitormap = {
   erma: 'recDbA60nLG4Ob2os',
   castile: 'recoAvLh0Ghb2Fpoe',
   renza: 'rec0rBXw59rTdfOc4',
+  chris: 'recIybGXGVnBYC4I6',
 };
 
 export default visitormap;
