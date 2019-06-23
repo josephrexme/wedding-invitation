@@ -196,7 +196,7 @@ const GroupB = styled.section`
       display: none;
     }
   }
-  ${({empty}) => empty && css`
+  ${({zero}) => zero && css`
     @media (max-width: 700px) {
       height: 250px;
     }
@@ -482,7 +482,7 @@ function Page() {
           </g>
         </svg>
       </GroupA>
-      <GroupB empty={inviteCount === 0}>
+      <GroupB zero={inviteCount === 0}>
         {
           inviteCount ? (
             <>
