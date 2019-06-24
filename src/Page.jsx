@@ -98,7 +98,7 @@ const GroupA = styled.section`
   }
   @media (max-width: 960px) {
     .couple {
-      top: 30%;
+      top: 31%;
     }
   }
   .invitation {
@@ -113,12 +113,12 @@ const GroupA = styled.section`
       top: 6%;
     }
     .couple{
-      top: 34%;
+      top: 35%;
     }
   }
   @media (max-width: 800px) {
     .couple{
-      top: 33%;
+      top: 34%;
     }
   }
   @media (max-width: 760px) {
