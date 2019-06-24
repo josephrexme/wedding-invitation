@@ -545,7 +545,7 @@ function Page() {
         </g></svg>
       </GroupC>
       <GroupD>
-        <h3 className="black text">PLEASE REPLY BY JULY 30TH<br />TO 414-204-2202</h3>
+        <h3 className="black text">PLEASE RSVP BY JULY 30TH<br />TO 414-204-2202</h3>
         <h3 className="black text">THANK YOU</h3>
         <svg viewBox="0 0 490 151" xmlns="http://www.w3.org/2000/svg">
         <g fill="none" stroke="#000">
