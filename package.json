@@ -11,7 +11,7 @@
     "test": "mocha",
     "start": "node src/server.js",
     "dev": "webpack-dev-server",
-    "build": "rm -rf public && webpack"
+    "build": "webpack"
   },
   "repository": {
     "type": "git",
