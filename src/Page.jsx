@@ -283,6 +283,10 @@ function Page() {
   const [visitorInfo, setVisitorInfo] = useState({});
   const [inviteCount, setInviteCount] = useState(0);
   const [reservations, setReservations] = useState([]);
+  const [venue, setVenue] = useState('STARK ENTERPRISES');
+  const [venueAddress, setVenueAddress] = useState('1897 Tony Stark street, New York 10288');
+  const [mapLink, setMapLink] = useState('https://maps.google.com');
+  const [contactNumber, setContactNumber] = useState('800-123-4567');
 
   const getVisitor = async (id) => {
     const visitor = await axios.get(`/attendees/${id}`);
@@ -334,6 +338,10 @@ function Page() {
     // request
     if(visitorId) {
       getVisitor(visitorId);
+      setVenue('DECATUR CONFERENCE CENTER');
+      setVenueAddress('4191, W US Hwy 36, Decatur, IL 62522');
+      setMapLink('https://goo.gl/maps/nGC5Vd4PxEiYZdnNA');
+      setContactNumber('414-204-2202');
     } else {
       setVisitorInfo({ name: 'Dr. Strange' });
       setReservations(['Captain Rogers', 'Tony Stark']);
@@ -531,11 +539,11 @@ function Page() {
       </svg>
       </GroupB>
       <GroupC>
-        <h4 className="text"><a href="https://goo.gl/maps/nGC5Vd4PxEiYZdnNA" target="_blank" title="Directions from Milwaukee">GET DIRECTIONS</a></h4>
+        <h4 className="text"><a href={mapLink} target="_blank" title="Directions from Milwaukee">GET DIRECTIONS</a></h4>
         <Venue>
           <svg viewBox="0 0 172 64" xmlns="http://www.w3.org/2000/svg"><g fill="none" stroke="#000"><path d="m.5 63.118h170.555"/><path d="m106.101 63.118v-56.249"/><path d="m65.486 63.118v-56.249"/><path d="m11.332 63.118v-29.814"/><path d="m160.255 63.118v-29.814"/><path d="m126.409 63.118-.016-38.31"/><path d="m45.178 63.118-.015-38.343"/><path d="m61.405 2.863h48.745v4.006h-48.745z"/><path d="m126.393 29.299h35.844v4.006h-35.844z"/><path d="m126.409 26.936h37.225v2.363h-37.225z"/><path d="m9.329 29.299h35.844v4.006h-35.844z"/><path d="m7.932 26.936h37.225v2.363h-37.225z"/><path d="m44.018 21.292 21.468-10.42-.046 4.171-21.343 9.991z"/><path d="m41.984 19.429 23.465-11.62-.004 3.063-23.374 11.406z"/><path d="m127.57 21.292-21.469-10.42.046 4.171 21.343 9.991z"/><path d="m129.604 19.429-23.465-11.62.003 3.063 23.374 11.406z"/><path d="m58.8.5h54.16v2.363h-54.16z"/><path d="m147.792 41.478-.021-3.347h4.458v6.924h-4.417l-.02-3.577h4.437"/><path d="m147.792 52.308-.021-3.346h4.458v6.924h-4.417l-.02-3.578h4.437"/><path d="m32.716 41.478-.022-3.347h4.458v6.924h-4.417l-.019-3.577h4.436"/><path d="m32.716 52.308-.022-3.346h4.458v6.924h-4.417l-.019-3.578h4.436"/><path d="m134.253 41.478-.021-3.347h4.458v6.924h-4.417l-.02-3.577h4.437"/><path d="m134.253 52.308-.021-3.346h4.458v6.924h-4.417l-.02-3.578h4.437"/><path d="m19.177 41.478-.021-3.347h4.458v6.924h-4.417l-.02-3.577h4.437"/><path d="m19.177 52.308-.021-3.346h4.458v6.924h-4.417l-.02-3.578h4.437"/><path d="m70.882 21.78v-9.653h29.554v13.16h-29.503l-.051-3.507h29.554"/><path d="m93.423 12.127v9.653"/><path d="m85.977 12.127v9.653"/><path d="m78.531 12.127v9.653"/><path d="m70.882 39.379v-9.653h29.554v13.161h-29.503l-.051-3.508h29.554"/><path d="m93.423 29.726v9.653"/><path d="m85.977 29.726v9.653"/><path d="m78.531 29.726v9.653"/><path d="m108.471 36.397v-9.653h15.191v13.16h-15.165l-.026-3.507h15.191"/><path d="m118.704 26.744v9.653"/><path d="m113.522 26.744v9.653"/><path d="m108.471 53.32v-9.653h15.191v13.16h-15.165l-.026-3.507h15.191"/><path d="m118.704 43.667v9.653"/><path d="m113.522 43.667v9.653"/><path d="m47.549 36.397v-9.653h15.19v13.16h-15.164l-.026-3.507h15.19"/><path d="m57.781 26.744v9.653"/><path d="m52.6 26.744v9.653"/><path d="m47.549 53.32v-9.653h15.19v13.16h-15.164l-.026-3.507h15.19"/><path d="m57.781 43.667v9.653"/><path d="m52.6 43.667v9.653"/><path d="m70.882 63.118v-16.182l29.554.084v16.098"/><path d="m77.167 63.118v-12.156l16.984.064v12.092"/><path d="m77.167 53.518h16.984"/><path d="m85.659 50.962v2.556"/><path d="m98.228 47.155h2.208v2.233h-2.208z"/><path d="m70.882 47.155h2.208v2.233h-2.208z"/></g></svg>
-          <h3 className="text">DECATUR CONFERENCE CENTER</h3>
-          <p className="auto text">4191, W US Hwy 36, Decatur, IL 62522</p>
+          <h3 className="text">{venue}</h3>
+          <p className="auto text">{venueAddress}</p>
           <p className="auto invert">Coming from Milwaukee? Use link below for less tolls</p>
         </Venue>
         <svg viewBox="0 0 490 124" xmlns="http://www.w3.org/2000/svg"><g fill="none" stroke="#000"><path d="m22.464 5.162-4.662-4.662h-17.302v30.782h55.16l5.477-5.477h-60.637"/><path d="m.5 5.201h34.121v2.675h-34.121"/><path d="m48.711 31.282v5.77h-48.211v-5.77"/><path d="m41.659 37.052-7.038 7.037h-25.198v65.719h-8.923v-72.756"/><path d="m9.423 109.808h8.353v-48.247s-.199-5.973 5.435-5.973h8.115v-11.443"/><path d="m6.161 7.876v10.208s.017 7.592 5.765 7.634"/><path d="m11.161 7.876v10.208s.017 7.592 5.765 7.634"/><path d="m16.161 7.876v10.208s.017 7.592 5.765 7.634"/><path d="m20.161 7.876v10.208s.017 7.592 5.765 7.634"/><path d="m25.161 7.876v10.208s.017 7.592 5.765 7.634"/><path d="m30.161 7.876v10.208s.017 7.592 5.765 7.634"/><path d="m34.161 7.876v10.208s.017 7.592 5.765 7.634"/><path d="m467.173 5.162 4.661-4.662h17.303v30.782h-55.16l-5.477-5.477h60.637"/><path d="m489.137 5.201h-34.122v2.675h34.122"/><path d="m440.926 31.282v5.77h48.211v-5.77"/><path d="m447.978 37.052 7.037 7.037h25.199v65.719h8.923v-72.756"/><path d="m480.214 109.808h-8.353v-48.247s.198-5.973-5.435-5.973h-8.115v-11.443"/><path d="m483.476 7.876v10.208s-.017 7.592-5.765 7.634"/><path d="m478.476 7.876v10.208s-.017 7.592-5.765 7.634"/><path d="m473.476 7.876v10.208s-.017 7.592-5.765 7.634"/><path d="m469.476 7.876v10.208s-.017 7.592-5.765 7.634"/><path d="m464.476 7.876v10.208s-.017 7.592-5.765 7.634"/><path d="m459.476 7.876v10.208s-.017 7.592-5.765 7.634"/><path d="m455.476 7.876v10.208s-.017 7.592-5.765 7.634"/>
@@ -545,7 +553,7 @@ function Page() {
         </g></svg>
       </GroupC>
       <GroupD>
-        <h3 className="black text">PLEASE RSVP BY JULY 30TH<br />TO 414-204-2202</h3>
+        <h3 className="black text">PLEASE RSVP BY JULY 30TH<br />TO {contactNumber}</h3>
         <h3 className="black text">THANK YOU</h3>
         <svg viewBox="0 0 490 151" xmlns="http://www.w3.org/2000/svg">
         <g fill="none" stroke="#000">
